@@ -52,7 +52,60 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color:#FFFEF8 ;
 }
+
+
+
+/** BANNERS mode édition + banner bas**/
+
+.banner-top {
+    background-color: black;
+	color : white;
+    width: 110%;
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: "Work Sans";
+	 position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+	display: none;*/
+}
+
+
+.banner-top i {
+    width: 18px;
+    height: 18px;
+}
+
+
+.banner-bas {
+    background-color: white;
+    width: 1440px;
+	height: 60px;
+    display: flex;
+    gap: 10px;
+	position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+}
+
+.banner-bas li {
+	margin-right: 20%;
+}
+
+/****/
+
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -84,6 +137,28 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+
+.titre-edition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em; /* espace entre le titre et "Mode édition" */
+}
+
+.mode-edition {
+  align-items: center;
+  gap: 0.5em;
+  color: #000000; 
+  font-size: 15px;
+  margin-bottom: 25px;
+  margin-left: 10px;
+  text-decoration: none;
+  /*display: none;*/
+}
+
+
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -93,11 +168,36 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	
 }
 
 li:hover {
 	color: #B1663C;
 }
+
+nav li a {
+	text-decoration: none; 
+	color: black;       
+}
+
+li a:hover {
+	color: #B1663C;
+}
+
+
+#login {
+	/*display : none;*/
+}
+
+#logout {
+	display: none;*/
+}
+
+#login-gras {
+  font-weight: bold;
+}
+
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -139,7 +239,7 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -183,6 +283,242 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
+	color: #1D6154;
+	text-decoration: none;
+	font-size: 0.9em;
 }
 
+
+/*Ajouter nouvelle page Html*/
+.motdepasse {
+	text-align: center; 
+	margin-top: 1em;
+}
+
+.motdepasse a {
+	color: #3D3D3D;
+}
+
+
+/* Modale */
+
+
+.modale {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex; /* Important pour que align-items et justify-content fonctionnent */
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	display: none;*/
+}
+
+.modale1-wrapper {
+	background: white;
+	width: 25%;
+	min-width: 300px;
+	padding: 20px;
+	border-radius: 10px;
+	position: relative;
+	text-align: center;
+	overflow: auto;
+}
+
+.modale-partie-1 { /*1er article de la modale*/
+  /*display: none;*/
+}
+
+.modale-partie-2 { /*2eme article de la modale*/
+  /*display: none;*/
+}
+
+/***Première partie de la modale***/
+
+
+.photo-gallerie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 20px;
+}
+
+.gallerie-item {
+  position: relative;
+  flex: 17%; 
+}
+
+.gallerie-item img {
+  width: 70px;
+  height: auto;
+  display: block;
+  margin: auto; 
+  justify-content: flex-start;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 6px;
+  right: 0px;
+  margin-right: 12px;
+  background: #000000;
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+ }
+
+.delete-icon i {
+  font-size: 10px;
+}
+
+
+.btnVert input {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	border: none; 
+	padding : 8px 20px;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 80px ;
+	margin-top: 15px;
+}
+
+.btnVert hr {
+	color: #B3B3B3 ;
+	width : 75%;
+}
+
+
+
+h3 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  margin-top: 30px;
+}
+
+.fond-encart i {
+    font-size: 60px;
+    color: #B9C5CC;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+
+
+.fleche-retour {
+	position: absolute;
+	left: 25px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #000000;
+}
+
+
+.close-btn {
+	position: absolute;
+	top: 15px;
+	right: 25px;
+	cursor: pointer;
+	font-size: 30px;
+	color : #000000;
+}
+
+
+.fond-encart {
+	background: #e8f0f4;
+	padding: 0.8em;
+	margin: auto; 
+	border-radius: 4px;
+	width: 72%;
+	height: 140px;
+}
+
+.fond-encart p {
+  font-size: 10px;
+  margin-top: 0;
+}
+
+.fond-encart button {
+	background-color: #CBD6DC;
+	display: flex;
+	padding: 8px 20px;
+	width: 40%;
+    border-radius: 20px;
+	border: none;
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color:#306685 ;
+}
+
+
+
+/*2me partie de la modale*/
+
+#ajoutphoto {
+	width: 50%;
+	margin-left: 50px;
+	margin-top: 0px;
+}
+
+
+#ajoutphoto form {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+#ajoutphoto input {
+	width : 150%;
+	height: 45px;
+	margin-top: 10px; 
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+
+#ajoutphoto label {
+	margin: 2em 0 0.3em 0;
+	display: flex;
+}
+
+
+
+#ajoutphoto select {
+  width : 150%;
+  height: 45px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+/* Bouton Valider*/
+
+.btnValider input {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #A7A7A7;
+	border: none; 
+	padding : 8px 20px;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 80px ;
+	margin-top: 15px;
+}
+
+.btnValider hr {
+	color: #B3B3B3 ;
+	width : 75%;
+}
