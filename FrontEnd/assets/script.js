@@ -8,30 +8,41 @@
 // CREATION GALLERIE IMAGE EN DYNAMIQUE //
 
 async function Galleriephoto() { // Appeler l'API pour récuperer les données //
+ 
+  let galleryItems;
   try {
     const response = await fetch('http://localhost : mettre ladresse ici'); // remplace l'URL par la tienne //
-    const galleryItems = await response.json(); // je nomme data le fichier qui contiendra les elements de mon API  //  
+
     if (!response.ok) {
       throw new Error ('Erreur lors du chargement'); // Le message s'affiche si pas de lien avec API // 
     }
-  };
 
-const galleryContainer = document.querySelector('.gallery'); // j'apelle la class de ma galerie pour creer des elements en dynamique //
+  galleryItems = await response.json(); // je nomme data le fichier qui contiendra les elements de mon API  //
+     
+} catch (error) {
+    console.error(error);
+  }
+ ;
 
-galleryItems.forEach(item => { //je creer ma boucle qui contient ces elements : je recupere l'element json // 
-  const figure = document.createElement('figure'); // je creer l'element figure dans le html //
-  const img = document.createElement('img'); // je creer l'element img dans le html //
-  img.src = item.src; // je récupere l'image //
-  img.alt = item.alt; // je récuperer le alt // 
 
-  const figcaption = document.createElement('figcaption');
-  figcaption.innerText = item.captionText; // Pour y mettre le texte correspondant //
 
-  figure.appendChild(img); // les appendChild lient l'element enfant au Parent //  
-  figure.appendChild(figcaption);
-  galleryContainer.appendChild(figure); 
-});
-}
+  const galleryContainer = document.querySelector('.gallery'); // j'apelle la class de ma galerie pour creer des elements en dynamique //
+
+  galleryItems.forEach(item => { //je creer ma boucle qui contient ces elements : je recupere l'element json // 
+    const figure = document.createElement('figure'); // je creer l'element figure dans le html //
+    const img = document.createElement('img'); // je creer l'element img dans le html //
+    img.src = item.src; // je récupere l'image //
+    img.alt = item.alt; // je récuperer le alt // 
+
+    const figcaption = document.createElement('figcaption');
+    figcaption.innerText = item.captionText; // Pour y mettre le texte correspondant //
+
+    figure.appendChild(img); // les appendChild lient l'element enfant au Parent //  
+    figure.appendChild(figcaption);
+    galleryContainer.appendChild(figure); 
+  })
+};
+
 // /!\ Pour la boucle, voir si je dois utiliser for. let. lenght à la place de foreach // 
 
 
@@ -40,14 +51,20 @@ galleryItems.forEach(item => { //je creer ma boucle qui contient ces elements : 
 // CREATION BOUTONS CATEGORIES EN DYNAMIQUE // 
 
 async function Categories () { // Appeler l'API pour récuperer les données // 
+  let categoryItems;
   try {
     const response = await fetch('http://localhost : mettre ici API liées aux catégories'); // remplace l'URL par la tienne //
-    
+
     if (!response.ok) {
       throw new Error ('Erreur lors du chargement'); // message si pas de lien avec API // 
     }
+   
+  categoryItems = await response.json();
+
+      } catch (error) {
+    console.error(error);
   }
-  const categoryItems = await response.json();
+  
   
   // Creer bouton 'Tous' // 
   const filtresContainer = document.getElementById('button-container'); //  j'apelle l'emplacement de mon HTML pour creer un element //
@@ -69,7 +86,6 @@ async function Categories () { // Appeler l'API pour récuperer les données //
   });
 
   filtresContainer.appendChild(button);
-
 };
 
 
