@@ -9,10 +9,12 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	<script src="assets/script.js" defer></script>
+	<script type="module" src="assets/script.js"></script> <!-- module pour faire export d'un js à un autre -->
+	<script type="module" src="assets/Modale.js"></script>
 </head>
 <body>
 
+<!-- Bannière -->
 	<div class="banner-top">
     	 <i class="fas fa-pen-to-square"></i>
     	<span>Mode édition</span>
@@ -23,7 +25,7 @@
 	<nav>
 		<ul>
 			<li>projets</li>
-			<li>contact</li>
+			<li><a href="#contact">Contact</a></li>
 			<li id="login">
     			<a href="login.html">Login</a>
 			</li>
@@ -59,50 +61,7 @@
 			
 
 		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		
 		</div>
 	</section>
 	<section id="contact">
@@ -131,48 +90,7 @@
      		 <!-- Premier affichage -->
       			<article class="modale-partie-1">
         			<h3 id="titlemodal"> Galerie photo </h3>
-        				<section class="photo-gallerie"> 
-       						<div class="gallerie-item">
-          						<img src="assets/images/abajour-tahina.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/appartement-paris-v.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/restaurant-sushisen-londres.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/la-balisiere.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/structures-thermopolis.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/appartement-paris-x.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/villa-ferneze.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/appartement-paris-xviii.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/le-coteau-cassis.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-        					<div class="gallerie-item">
-          						<img src="assets/images/bar-lullaby-paris.png" alt="Photo galerie">
-          						<span class="delete-icon"><i class="fa-solid fa-trash-can"></i></span>
-        					</div>
-      					</section>
+        				<div class="photo-gallerie"></div> 
 
       				<div class="btnVert">
         				<hr>
@@ -190,7 +108,7 @@
           						<p>jpg, png : 4mo max</p>
         					</div>
 
-        					<section id="ajoutphoto">
+        					<div id="ajoutphoto">
           						<label for="title">Titre</label>
           						<input type="text" name="title" id="title">
 
@@ -200,7 +118,7 @@
             						<option value="1">trouver dans l'API</option>
             						<option value="2">trouver dans l'API</option>
           						</select>
-        					</section>
+        					</div>
 
        						<div class="btnValider">
           						<hr>

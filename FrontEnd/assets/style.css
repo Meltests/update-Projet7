@@ -64,19 +64,21 @@ body {
 	color : white;
     width: 110%;
     padding: 15px 0;
-    display: flex;
     align-items: center;
     justify-content: center;
+	display: flex;
     gap: 10px;
     font-family: "Work Sans";
-	 position: relative;
+	position: relative;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
     width: 100vw;
-	display: none;*/
+	display: none;
 }
+
+
 
 
 .banner-top i {
@@ -154,7 +156,7 @@ h2{
   margin-bottom: 25px;
   margin-left: 10px;
   text-decoration: none;
-  /*display: none;*/
+  display: none;*/
 }
 
 
@@ -280,6 +282,10 @@ input[type="submit"]{
 	border-radius: 60px ;
 }
 
+input[type="submit"]:hover {
+    background-color: #0E2F28;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
@@ -320,7 +326,7 @@ footer nav ul {
 
 .modale1-wrapper {
 	background: white;
-	width: 25%;
+	width: 35%;
 	min-width: 300px;
 	padding: 20px;
 	border-radius: 10px;
@@ -521,4 +527,44 @@ h3 {
 .btnValider hr {
 	color: #B3B3B3 ;
 	width : 75%;
+}
+
+
+/* boutons catégories */
+
+#button-container {
+    display: flex;
+    gap: 1em;            
+    flex-wrap: wrap; 
+	margin : 30px 0 50px 0px;   
+	justify-content: center;   
+}
+
+
+.filtres-button {
+    font-family: 'Syne';
+    font-weight: 400;
+	background-color: white;
+    color: #1D6154;
+    border: 1px solid #1D6154;
+    margin: 0;
+    width: auto;
+    padding: 0 1.5em;
+    text-align: center;
+    border-radius: 60px;
+    height: 40px;
+    font-size: 1.2em;
+    display: block;
+    cursor: pointer;
+   
+}
+
+.filtres-button.active {
+    background-color: #1D6154;
+    color: white;
+    border: none;
+}
+
+.filtres-button:not(.active):hover {
+    background-color: #f0f0f0;
 }
