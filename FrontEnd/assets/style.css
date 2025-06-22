@@ -156,7 +156,7 @@ h2{
   margin-bottom: 25px;
   margin-left: 10px;
   text-decoration: none;
-  display: none;*/
+  display: none;
 }
 
 
@@ -192,7 +192,7 @@ li a:hover {
 }
 
 #logout {
-	display: none;*/
+	display: none;
 }
 
 #login-gras {
@@ -317,11 +317,10 @@ footer nav ul {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
-	display: flex; /* Important pour que align-items et justify-content fonctionnent */
 	align-items: center;
 	justify-content: center;
 	z-index: 1000;
-	display: none;*/
+	display: none;
 }
 
 .modale1-wrapper {
@@ -336,11 +335,11 @@ footer nav ul {
 }
 
 .modale-partie-1 { /*1er article de la modale*/
-  /*display: none;*/
+ display: block;
 }
 
 .modale-partie-2 { /*2eme article de la modale*/
-  /*display: none;*/
+  display: none;
 }
 
 /***Première partie de la modale***/
@@ -350,12 +349,11 @@ footer nav ul {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  padding: 0 20px;
+  padding: 0 45px;
 }
 
 .gallerie-item {
-  position: relative;
-  flex: 17%; 
+  position: relative; 
 }
 
 .gallerie-item img {
@@ -396,11 +394,13 @@ footer nav ul {
 	text-align: center;
 	border-radius: 80px ;
 	margin-top: 15px;
+	margin-bottom: 0;
 }
 
 .btnVert hr {
 	color: #B3B3B3 ;
 	width : 75%;
+	margin-top: 20px;
 }
 
 
@@ -423,10 +423,12 @@ h3 {
 .fleche-retour {
 	position: absolute;
 	left: 25px;
+	top : 25px;
 	cursor: pointer;
 	font-size: 20px;
 	color: #000000;
-}
+	/*display : none;*/
+ }
 
 
 .close-btn {
@@ -522,6 +524,7 @@ h3 {
 	text-align: center;
 	border-radius: 80px ;
 	margin-top: 15px;
+	margin-bottom: 0;
 }
 
 .btnValider hr {

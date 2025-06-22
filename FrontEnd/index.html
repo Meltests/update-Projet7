@@ -82,9 +82,8 @@
 
 <!-- MODALE -->
 
-<aside id="modale1" class="modale" aria-hidden="true" role="Galeriephoto" aria-modale="false" aria-labelledby="Galeriephoto">
+<aside id="modale1" class="modale" aria-hidden="true" role="dialog" aria-modale="false" aria-labelledby="Galeriephoto">
 	<div class="modale1-wrapper">
-		<span class="fleche-retour"><i class="fa-solid fa-arrow-left"></i></span>
     	<span class="close-btn">&times;</span>
 			<section>
      		 <!-- Premier affichage -->
@@ -94,13 +93,14 @@
 
       				<div class="btnVert">
         				<hr>
-        				<input type="submit" value="Ajouter une photo">
+        				<input type="submit" id = "Validerbtn" value="Ajouter une photo">
       				</div>
       			</article>
 
      		 <!-- Deuxième affichage -->
-      			<article class="modale-partie-2">
-        			<h3 id="titlemodal"> Ajout photo </h3>
+      			<article class="modale-partie-2" id="modale2">
+					<span class="fleche-retour"><i class="fa-solid fa-arrow-left"></i></span>
+        			<h3 id="titlemodal1"> Ajout photo </h3>
         				<form id="modaleForm">
        						<div class="fond-encart">
           						<i class="fa-regular fa-image"></i>

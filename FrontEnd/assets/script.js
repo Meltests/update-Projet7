@@ -137,17 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnModifier = document.querySelector('.mode-edition');
 
   if (token) {
-    if (banner) banner.style.display = 'flex'; // condition sur element si token actif, pour activer l'element//
-    if (loginMenu) loginMenu.style.display = 'none';
-    if (logoutMenu) logoutMenu.style.display = 'inline-block';
-    if (btnCategories) btnCategories.style.display = 'none';
-    if (btnModifier) btnModifier.style.display = "flex";
+   banner.style.display = 'flex'; // condition sur element si token actif, pour activer l'element//
+   loginMenu.style.display = 'none';
+   logoutMenu.style.display = 'inline-block';
+   btnCategories.style.display = 'none';
+   btnModifier.style.display = "flex";
   } else {
-    if (banner) banner.style.display = 'none'; // condition sur element si token non actif //
-    if (loginMenu) loginMenu.style.display = 'inline-block';
-    if (logoutMenu) logoutMenu.style.display = 'none';
-    if (btnCategories) btnCategories.style.diplay = 'flex';
-    if (btnModifier) btnModifier.style.display = 'none';
+  banner.style.display = 'none'; // condition sur element si token non actif //
+  loginMenu.style.display = 'inline-block';
+  logoutMenu.style.display = 'none';
+  btnCategories.style.diplay = 'flex';
+  btnModifier.style.display = 'none';
   }
 
   const logout = document.querySelector('#logout a'); // récuperer element bouton logout en //
