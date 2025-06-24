@@ -1,6 +1,6 @@
-// fichier js 1 : tout ce qui est lié à la page d'accueil // 
-// fichier js 2 (non crée) : tout ce qui sera lié à la page login // 
-// fichier js 3 (non crée) : tout ce qui sera lié à la modale // 
+// fichier js 1 : page d'accueil // 
+// fichier js 2 : page login // 
+// fichier js 3 : page modale // 
 
 
 

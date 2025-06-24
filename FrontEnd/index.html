@@ -104,8 +104,12 @@
         				<form id="modaleForm">
        						<div class="fond-encart">
           						<i class="fa-regular fa-image"></i>
-          						<button type="button">+ Ajouter photo</button>
+								<input type="file" id="ajouterImg" accept="image/png, image/jpeg" style="display: none;" >
+          						<button type="button" id="boutonajout">+ Ajouter photo</button>
+								<span id="nameimg"></span>
           						<p>jpg, png : 4mo max</p>
+								
+								<img id="preview-image" src="" alt="Aperçu de la photo" style="display: none;" />
         					</div>
 
         					<div id="ajoutphoto">
@@ -115,8 +119,6 @@
           						<label for="category">Catégorie</label>
           						<select name="category" id="category">
             						<option value=""></option>
-            						<option value="1">trouver dans l'API</option>
-            						<option value="2">trouver dans l'API</option>
           						</select>
         					</div>
 

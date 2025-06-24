@@ -1,6 +1,6 @@
-// fichier js 1 : tout ce qui est lié à la page d'accueil // 
-// fichier js 2 (non crée) : tout ce qui sera lié à la page login // 
-// fichier js 3 (non crée) : tout ce qui sera lié à la modale // 
+// fichier js "script" : Page d'accueil // 
+// fichier js "login": Page login // 
+// fichier js "modale" page modale // 
 
 
 // GALLERIE PHOTO DANS LA MODALE CREES EN DYNAMIQUE (import js) //
@@ -35,6 +35,12 @@ async function Galleriemodale() {
         const token = localStorage.getItem('token'); //apelle le token //
         if (!token) return;
 
+        const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette photo ?");
+        if (!confirmDelete) {
+          return; // si pas de confirmation de suppression alors retour //
+        }
+
+
        try {
         const response = await fetch(`http://localhost:5678/api/works/${item.id}`, { //route de l'API//
           method: 'DELETE',
@@ -56,8 +62,6 @@ async function Galleriemodale() {
       modaleContainer.appendChild(div);
     });
 
-
-
     
 return galleryItems;
     }
@@ -69,15 +73,49 @@ return galleryItems;
 Galleriemodale();
 
 
+
+// CHARGEMENT DES CATERGORIES sur modale dans formulaire ajout photo // 
+const categorySelect = document.getElementById('category');
+
+async function ChargementCategories() {
+  try {
+    const response = await fetch('http://localhost:5678/api/categories');
+    if (!response.ok) {
+      throw new Error('Erreur récupération catégories');
+    } 
+
+    const categories = await response.json();
+
+
+    categories.forEach(categorie => {
+      const option = document.createElement('option'); // je creer une option de dynamique qui affichera la catégorie // 
+      option.value = categorie.id;         // id de la catégorie (swagger) //
+      option.textContent = categorie.name; // afficher le nom de la catégorie (swagger) //
+      categorySelect.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Erreur chargement catégories:', error);
+  }
+}
+
+
+
+
 //OUVRIR LA MODALE//
 
-document.addEventListener('DOMContentLoaded', () => { // je creer un evenement sur le bouton "modifier"//
+document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est chargé // 
+    
+  ChargementCategories(); // Appel de la fonction pour charger les catégories//
+
+  /// ------------------------------- ///
+  
   const openModale = document.querySelector('.mode-edition'); //je vais chercher l'élement// 
   const modale = document.getElementById('modale1'); 
 
   if (openModale && modale) {
     openModale.addEventListener('click', (ouvrirModale) => {
-      ouvrirModale.preventDefault();
+      ouvrirModale.preventDefault(); // pour ne pas recharger la page//
       modale.style.display = 'flex';
     });
   }
@@ -131,9 +169,117 @@ document.addEventListener('DOMContentLoaded', () => { // je creer un evenement s
 
 
 
-// supprimer ou photo avec poubelle // 
 
 
+// AJOUT PHOTO SUR LA MODALE //
+
+      const form = document.getElementById('modaleForm'); // je vais chercher le formulaire de la modale//
+      const chargementimg = document.getElementById('ajouterImg'); //
+      const boutonajout = document.getElementById('boutonajout');
+      const nomImage = document.getElementById('nameimg');
+
+      if (boutonajout && chargementimg && nomImage) {
+          boutonajout.addEventListener('click', () => { 
+          chargementimg.click(); // changer d'image quand je clique sur le bouton //
+      });
+
+
+  // ajout nom du fichier dans le span à la création //
+      chargementimg.addEventListener('change', () => { // change pour modifier la valeur du champ //
+        if (chargementimg.files.length > 0) { // si au moins 1 fichier selectionné //
+        nomImage.textContent = chargementimg.files[0].name;
+        } 
+       }); 
+       }
+
+// Afficher la photo ajoutée en format image //
+
+    chargementimg.addEventListener('change', () => {
+      if (chargementimg.files.length > 0) {
+        const file = chargementimg.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (evenementReader) {
+          const visuelImage = document.getElementById('preview-image');
+          if (visuelImage) {
+            visuelImage.src = evenementReader.target.result;
+            visuelImage.style.display = 'block';
+
+            // Cacher les autres éléments à l'ajout de la photo //
+            const fondencartIcon = document.querySelector('.fond-encart i');
+            const fondtexte = document.querySelector('.fond-encart p');
+
+              if (fondencartIcon && boutonajout && nomImage && fondtexte) { //mettre ces elements en none//
+                fondencartIcon.style.display = 'none';
+                boutonajout.style.display = 'none';
+                nomImage.style.display = 'none';
+                fondtexte.style.display = 'none';
+              }
+        };
+      }
+
+        reader.readAsDataURL(file); 
+        nomImage.textContent = file.name;
+      }
+    });
+  
+//////////////////////////
+
+
+       if (form) {
+          form.addEventListener('submit', async (eventform) => { // submit pour le formulaire //
+          eventform.preventDefault(); // eviter que la page se recharge //
+
+          const imageAjoutee = chargementimg.files[0];
+          const title = document.getElementById('title').value;
+          const category = document.getElementById('category').value;
+
+     if (!imageAjoutee || !title || !category) { // si pas un des elements, recevoir ce message //
+      alert('Veuillez remplir tous les champs.');
+      return;
+    }
+
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Vous devez être connecté pour ajouter une photo.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', imageAjoutee); // append pour ajouter valeur // 
+    formData.append('title', title);
+    formData.append('category', category);
+
+ 
+    try {
+      const response = await fetch('http://localhost:5678/api/works', { // creer requete API dans POST //
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData // je viens ajouter dans mon API la data crée (img,titre,catérogie) //
+      });
+
+      if (response.ok) {
+        alert("Photo ajoutée avec succès !");
+        form.reset();
+        nomImage.textContent = '';
+
+        
+        await Galleriemodale();
+        modalePartie2.style.display = 'none'; // une fois que la photo est ajoutée, revenir sur modale 1//
+        modalePartie1.style.display = 'block';
+        flecheRetour.style.display = 'none';
+      } else {
+        alert("Échec de l'ajout");
+      }
+
+    } catch (error) {
+    }
+    
+  });
+}
 });
 
 

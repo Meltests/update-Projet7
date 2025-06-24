@@ -411,12 +411,6 @@ h3 {
   margin-top: 30px;
 }
 
-.fond-encart i {
-    font-size: 60px;
-    color: #B9C5CC;
-    display: block;
-    margin: 0 auto 10px;
-}
 
 
 
@@ -443,17 +437,27 @@ h3 {
 
 .fond-encart {
 	background: #e8f0f4;
-	padding: 0.8em;
+	padding: 0;
 	margin: auto; 
 	border-radius: 4px;
-	width: 72%;
-	height: 140px;
+	width: 75%;
+	height: 150px;
 }
 
 .fond-encart p {
   font-size: 10px;
   margin-top: 0;
 }
+
+
+.fond-encart i {
+    font-size: 60px;
+    color: #B9C5CC;
+    display: block;
+    margin: 0 auto 10px;
+	padding-top: 10px;
+}
+
 
 .fond-encart button {
 	background-color: #CBD6DC;
@@ -468,7 +472,25 @@ h3 {
 	color:#306685 ;
 }
 
+.fond-encart button:hover {
+    background-color: #a9b8c2; 
+}
 
+.fond-encart img {
+  height: 140px;
+  width: auto;
+  display: block;
+  margin: auto;
+  border-radius: 4px;
+}
+
+#preview-image {
+  width: 35%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  border-radius: 0;
+}
 
 /*2me partie de la modale*/
 
@@ -499,6 +521,7 @@ h3 {
 	margin: 2em 0 0.3em 0;
 	display: flex;
 }
+
 
 
 
