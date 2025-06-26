@@ -82,7 +82,7 @@
 
 <!-- MODALE -->
 
-<aside id="modale1" class="modale" aria-hidden="true" role="dialog" aria-modale="false" aria-labelledby="Galeriephoto">
+<aside id="modale1" class="modale" role="dialog" aria-modale="false" aria-labelledby="Galeriephoto">
 	<div class="modale1-wrapper">
     	<span class="close-btn">&times;</span>
 			<section>
@@ -104,12 +104,12 @@
         				<form id="modaleForm">
        						<div class="fond-encart">
           						<i class="fa-regular fa-image"></i>
-								<input type="file" id="ajouterImg" accept="image/png, image/jpeg" style="display: none;" >
+								<input type="file" id="ajouterImg" accept="image/png, image/jpeg" >
           						<button type="button" id="boutonajout">+ Ajouter photo</button>
 								<span id="nameimg"></span>
           						<p>jpg, png : 4mo max</p>
 								
-								<img id="preview-image" src="" alt="Aperçu de la photo" style="display: none;" />
+								<img id="preview-image" src="" alt="Aperçu de la photo"/>
         					</div>
 
         					<div id="ajoutphoto">
@@ -124,7 +124,7 @@
 
        						<div class="btnValider">
           						<hr>
-          						<input type="submit" value="Valider">
+          						<input type="submit" value="Valider" id="BtnValiderActif">
         					</div>
       					</form>
       			</article>

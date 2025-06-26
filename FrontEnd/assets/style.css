@@ -484,6 +484,10 @@ h3 {
   border-radius: 4px;
 }
 
+.fond-encart input {
+	display: none;
+}
+
 #preview-image {
   width: 35%;
   height: 100%;
@@ -554,6 +558,8 @@ h3 {
 	color: #B3B3B3 ;
 	width : 75%;
 }
+
+
 
 
 /* boutons catégories */

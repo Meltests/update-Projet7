@@ -121,14 +121,10 @@ function activerBoutonActif(boutonActif) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  Galleriephoto();
-  Categories();
 
-
-  // Afficher / supprimer elements en MODE EDITION // 
+// Afficher / supprimer elements en MODE EDITION // 
   
-
+ function AffichageloginLogout() {
   const token = localStorage.getItem('token'); // je récupére le token de ma page login //
     const banner = document.querySelector('.banner-top'); // je récupere les elements du DOM // 
     const loginMenu = document.getElementById('login');
@@ -142,23 +138,33 @@ document.addEventListener('DOMContentLoaded', () => {
    logoutMenu.style.display = 'inline-block';
    btnCategories.style.display = 'none';
    btnModifier.style.display = "flex";
-  } else {
-  banner.style.display = 'none'; // condition sur element si token non actif //
-  loginMenu.style.display = 'inline-block';
-  logoutMenu.style.display = 'none';
-  btnCategories.style.diplay = 'flex';
-  btnModifier.style.display = 'none';
-  }
+  } 
 
-  const logout = document.querySelector('#logout a'); // récuperer element bouton logout en //
+  const logout = document.querySelector('#logout a');
+ 
   if (logout) {
-    logout.addEventListener('click', (evenementLogout) => {
-      evenementLogout.preventDefault();
-      localStorage.removeItem('token');
-      window.location.reload();
-    });
-  }
+  logout.addEventListener('click', (evenementLogout) => {
+    evenementLogout.preventDefault();
+
+    localStorage.removeItem('token');
+
+    banner.style.display = 'none';
+    loginMenu.style.display = 'inline-block';
+    logoutMenu.style.display = 'none';
+    btnCategories.style.display = 'flex';
+    btnModifier.style.display = 'none';
+  });
+}
+ }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  Galleriephoto();
+  Categories();
+  AffichageloginLogout();
 });
 
 
 
+
+ 

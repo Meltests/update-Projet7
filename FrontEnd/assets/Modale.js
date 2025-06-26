@@ -3,6 +3,9 @@
 // fichier js "modale" page modale // 
 
 
+
+
+
 // GALLERIE PHOTO DANS LA MODALE CREES EN DYNAMIQUE (import js) //
 
 import { Galleriephoto } from './script.js';
@@ -63,7 +66,7 @@ async function Galleriemodale() {
     });
 
     
-return galleryItems;
+return ; // voir ça //
     }
     catch (error) {
     console.error(error);
@@ -97,7 +100,7 @@ async function ChargementCategories() {
   } catch (error) {
     console.error('Erreur chargement catégories:', error);
   }
-}
+} 
 
 
 
@@ -109,6 +112,8 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
   ChargementCategories(); // Appel de la fonction pour charger les catégories//
 
   /// ------------------------------- ///
+
+  // ------------------------------- //
   
   const openModale = document.querySelector('.mode-edition'); //je vais chercher l'élement// 
   const modale = document.getElementById('modale1'); 
@@ -177,6 +182,8 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
       const chargementimg = document.getElementById('ajouterImg'); //
       const boutonajout = document.getElementById('boutonajout');
       const nomImage = document.getElementById('nameimg');
+      
+      
 
       if (boutonajout && chargementimg && nomImage) {
           boutonajout.addEventListener('click', () => { 
@@ -201,6 +208,9 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
 
         reader.onload = function (evenementReader) {
           const visuelImage = document.getElementById('preview-image');
+        
+          
+        
           if (visuelImage) {
             visuelImage.src = evenementReader.target.result;
             visuelImage.style.display = 'block';
@@ -227,12 +237,15 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
 
 
        if (form) {
+
+        
           form.addEventListener('submit', async (eventform) => { // submit pour le formulaire //
           eventform.preventDefault(); // eviter que la page se recharge //
 
           const imageAjoutee = chargementimg.files[0];
           const title = document.getElementById('title').value;
           const category = document.getElementById('category').value;
+          const visuelImage = document.getElementById('preview-image');
 
      if (!imageAjoutee || !title || !category) { // si pas un des elements, recevoir ce message //
       alert('Veuillez remplir tous les champs.');
@@ -264,7 +277,8 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
       if (response.ok) {
         alert("Photo ajoutée avec succès !");
         form.reset();
-        nomImage.textContent = '';
+        nomImage.textContent = ''; //vider les champs une fois photo ajoutée//    
+        
 
         
         await Galleriemodale();
@@ -280,6 +294,33 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
     
   });
 }
+
+///////// Bouton apparait en vert quand tous les champs sont remplis // 
+const boutonValider = document.getElementById('BtnValiderActif');
+const champTitre = document.getElementById('title');
+const champCategorie = document.getElementById('category');
+
+
+function activerBoutonSiChampsRemplis() {// Fonction pour activer ou désactiver le bouton//
+  if (
+    chargementimg.files.length > 0 &&
+    champTitre.value.trim() !== '' &&
+    champCategorie.value !== ''
+  ) {
+    boutonValider.disabled = false;
+    boutonValider.style.backgroundColor = '#1D6154'; // Vert actif //
+  } else {
+    boutonValider.disabled = true;
+    boutonValider.style.backgroundColor = '#A7A7A7'; // Gris inactif //
+  }
+}
+activerBoutonSiChampsRemplis();
+
+
+// ecouter l'évenement pour activer la fonction si champs selectionné // 
+chargementimg.addEventListener('change', activerBoutonSiChampsRemplis);
+champTitre.addEventListener('input', activerBoutonSiChampsRemplis);
+champCategorie.addEventListener('change', activerBoutonSiChampsRemplis);
 });
 
 
