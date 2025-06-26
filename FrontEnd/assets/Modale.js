@@ -278,9 +278,27 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
         alert("Photo ajoutée avec succès !");
         form.reset();
         nomImage.textContent = ''; //vider les champs une fois photo ajoutée//    
-        
+        visuelImage.src = ''; // Réinitialiser la preview de l'image //
+        visuelImage.style.display = 'none';
 
+        // Réafficher les éléments masqués
+        const fondencartIcon = document.querySelector('.fond-encart i');
+        const fondtexte = document.querySelector('.fond-encart p');
+
+        if (fondencartIcon && boutonajout && nomImage && fondtexte) {
+        fondencartIcon.style.display = 'block';
+        boutonajout.style.display = 'inline-block';
+        nomImage.style.display = 'inline-block';
+        fondtexte.style.display = 'block';
+        }
         
+        const boutonValider = document.getElementById('BtnValiderActif');
+        if (boutonValider) {
+        boutonValider.disabled = true;
+        boutonValider.style.backgroundColor = '#A7A7A7';  
+        }
+
+
         await Galleriemodale();
         modalePartie2.style.display = 'none'; // une fois que la photo est ajoutée, revenir sur modale 1//
         modalePartie1.style.display = 'block';
