@@ -1,14 +1,6 @@
-// fichier js "script" : Page d'accueil // 
-// fichier js "login": Page login // 
-// fichier js "modale" page modale // 
-
-
-
-
-
 // GALLERIE PHOTO DANS LA MODALE CREES EN DYNAMIQUE (import js) //
 
-import { Galleriephoto } from './script.js';
+import { Galleriephoto, creerImageElement, urlAPI} from './script.js';
 
 async function Galleriemodale() {
 
@@ -22,9 +14,7 @@ async function Galleriemodale() {
         const div = document.createElement('div'); //je creer la div qui contiendra mes elements: img, alt etc//
         div.classList.add('gallerie-item'); // je crrer la class associé à la div //
 
-        const img = document.createElement('img'); //je creer l'img dans ma div//
-        img.src = item.imageUrl;
-        img.alt = item.title;
+        const img = creerImageElement(item); 
 
         const deleteSpan = document.createElement('span'); //je creer le span dans la div qui va contenir l'icone poubelle//
         deleteSpan.classList.add('delete-icon');
@@ -82,7 +72,7 @@ const categorySelect = document.getElementById('category');
 
 async function ChargementCategories() {
   try {
-    const response = await fetch('http://localhost:5678/api/categories');
+    const response = await fetch(urlAPI + 'categories');
     if (!response.ok) {
       throw new Error('Erreur récupération catégories');
     } 
@@ -102,6 +92,23 @@ async function ChargementCategories() {
   }
 } 
 
+/////
+
+function afficherElementsFormulaireImage(afficher) {
+  const fondencartIcon = document.querySelector('.fond-encart i');
+  const fondtexte = document.querySelector('.fond-encart p');
+  const boutonajout = document.getElementById('boutonajout');
+  const nomImage = document.getElementById('nameimg');
+
+  if (fondencartIcon && boutonajout && nomImage && fondtexte) {
+    fondencartIcon.style.display = afficher ? 'block' : 'none';
+    boutonajout.style.display = afficher ? 'inline-block' : 'none';
+    nomImage.style.display = afficher ? 'inline-block' : 'none';
+    fondtexte.style.display = afficher ? 'block' : 'none';
+  }
+}
+
+
 
 
 
@@ -111,9 +118,6 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
     
   ChargementCategories(); // Appel de la fonction pour charger les catégories//
 
-  /// ------------------------------- ///
-
-  // ------------------------------- //
   
   const openModale = document.querySelector('.mode-edition'); //je vais chercher l'élement// 
   const modale = document.getElementById('modale1'); 
@@ -216,18 +220,10 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
             visuelImage.style.display = 'block';
 
             // Cacher les autres éléments à l'ajout de la photo //
-            const fondencartIcon = document.querySelector('.fond-encart i');
-            const fondtexte = document.querySelector('.fond-encart p');
-
-              if (fondencartIcon && boutonajout && nomImage && fondtexte) { //mettre ces elements en none//
-                fondencartIcon.style.display = 'none';
-                boutonajout.style.display = 'none';
-                nomImage.style.display = 'none';
-                fondtexte.style.display = 'none';
-              }
+             afficherElementsFormulaireImage(false);
+            
         };
       }
-
         reader.readAsDataURL(file); 
         nomImage.textContent = file.name;
       }
@@ -266,13 +262,15 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
 
  
     try {
-      const response = await fetch('http://localhost:5678/api/works', { // creer requete API dans POST //
+      const response = await fetch(urlAPI + 'works', { // creer requete API dans POST //
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
         },
         body: formData // je viens ajouter dans mon API la data crée (img,titre,catérogie) //
       });
+
+    
 
       if (response.ok) {
         alert("Photo ajoutée avec succès !");
@@ -282,15 +280,7 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
         visuelImage.style.display = 'none';
 
         // Réafficher les éléments masqués
-        const fondencartIcon = document.querySelector('.fond-encart i');
-        const fondtexte = document.querySelector('.fond-encart p');
-
-        if (fondencartIcon && boutonajout && nomImage && fondtexte) {
-        fondencartIcon.style.display = 'block';
-        boutonajout.style.display = 'inline-block';
-        nomImage.style.display = 'inline-block';
-        fondtexte.style.display = 'block';
-        }
+        afficherElementsFormulaireImage(true); 
         
         const boutonValider = document.getElementById('BtnValiderActif');
         if (boutonValider) {
@@ -320,16 +310,12 @@ const champCategorie = document.getElementById('category');
 
 
 function activerBoutonSiChampsRemplis() {// Fonction pour activer ou désactiver le bouton//
-  if (
-    chargementimg.files.length > 0 &&
-    champTitre.value.trim() !== '' &&
-    champCategorie.value !== ''
-  ) {
-    boutonValider.disabled = false;
-    boutonValider.style.backgroundColor = '#1D6154'; // Vert actif //
+  if (chargementimg.files.length > 0 && champTitre.value !== '' && champCategorie.value !== '') {
+    boutonValider.disabled = false; // si l'image est selectionné, le titre et catégorie est remplie //
+    boutonValider.style.backgroundColor = '#1D6154'; // alors le bouton deviens vert //
   } else {
     boutonValider.disabled = true;
-    boutonValider.style.backgroundColor = '#A7A7A7'; // Gris inactif //
+    boutonValider.style.backgroundColor = '#A7A7A7'; // sinon le bouton deviens gris //
   }
 }
 activerBoutonSiChampsRemplis();
@@ -343,4 +329,4 @@ champCategorie.addEventListener('change', activerBoutonSiChampsRemplis);
 
 
 
-   
+ 

@@ -1,14 +1,22 @@
-// fichier js 1 : tout ce qui est lié à la page d'accueil // 
-// fichier js 2 (non crée) : tout ce qui sera lié à la page login // 
-// fichier js 3 (non crée) : tout ce qui sera lié à la modale //  
 
+//fonction API // 
+
+export const urlAPI = 'http://localhost:5678/api/';
+
+// 
+export function creerImageElement(item) {
+  const img = document.createElement('img');
+  img.src = item.imageUrl;
+  img.alt = item.title;
+  return img;
+}
 
 
 
 // CREATION GALLERIE IMAGE EN DYNAMIQUE //
 export async function Galleriephoto() { // je fais un export pour réutiliser ma fonction dans autre js//
   try {
-    const response = await fetch('http://localhost:5678/api/works'); // Appeler l'API pour récuperer les données images//
+    const response = await fetch(urlAPI + 'works'); // Appeler l'API pour récuperer les données images//
     
     if (!response.ok) {
     throw new Error('Erreur lors du chargement'); // Le message s'affiche si pas de lien avec API //
@@ -21,9 +29,7 @@ export async function Galleriephoto() { // je fais un export pour réutiliser ma
 
     galleryItems.forEach(item => { //je creer ma boucle qui contient ces elements : je recupere l'element json // 
       const figure = document.createElement('figure'); // je creer l'element figure dans le html //
-      const img = document.createElement('img'); // je creer l'element img dans le html //
-      img.src = item.imageUrl; // je récupere du swagger //
-      img.alt = item.title;
+      const img = creerImageElement(item);
 
       const figcaption = document.createElement('figcaption'); 
       figcaption.innerText = item.title;
@@ -39,11 +45,16 @@ export async function Galleriephoto() { // je fais un export pour réutiliser ma
   }
 }
 
+
+
+
+
+
 // CREATION BOUTONS CATEGORIES EN DYNAMIQUE // 
 
 async function Categories() {
   try {
-    const response = await fetch('http://localhost:5678/api/categories'); // remplace l'URL par la tienne //
+    const response = await fetch(urlAPI + 'categories'); // remplace l'URL par la tienne //
     
     if (!response.ok)    {
         throw new Error('Erreur lors du chargement des catégories');
@@ -84,7 +95,7 @@ async function Categories() {
 
 async function filtrerCategorieGalerie(categoryId = 0) {
   try {
-    const response = await fetch('http://localhost:5678/api/works');  // recuperer les photos filtrées dans l'API //
+    const response = await fetch(urlAPI + 'works');  // recuperer les photos filtrées dans l'API //
    
     if (!response.ok) {
       throw new Error("Erreur lors du chargement des photos");

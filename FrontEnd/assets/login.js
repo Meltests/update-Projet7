@@ -1,8 +1,4 @@
-// fichier js 1 : page d'accueil // 
-// fichier js 2 : page login // 
-// fichier js 3 : page modale // 
 
-//import { Galleriephoto } from './script.js';//
 
 const form = document.getElementById('login-form'); // je vais chercher l'element de mon HTML que je souhaite traiter //
 
