@@ -4,6 +4,7 @@ import { Galleriephoto, creerImageElement, urlAPI} from './script.js';
 
 async function Galleriemodale() {
 
+
   try {
    const photosModale = await Galleriephoto();  // Appelle la fonction déjà exportée, et récupère les données API
  
@@ -34,6 +35,7 @@ async function Galleriemodale() {
         }
 
 
+        
        try {
         const response = await fetch(`http://localhost:5678/api/works/${item.id}`, { //route de l'API//
           method: 'DELETE',
@@ -56,7 +58,7 @@ async function Galleriemodale() {
     });
 
     
-return ; // voir ça //
+return ; 
     }
     catch (error) {
     console.error(error);
