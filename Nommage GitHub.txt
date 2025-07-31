@@ -1,0 +1,30 @@
+## Nommage des commits du projet : 
+
+Pour une raison d'une erreur de nommage des commits, 
+vous trouverez à travers ce fichier, le nom adéquate correspondant à chacun 
+des commits.  
+
+- Commit via terminal : Page d'accueil et page login html. 
+
+- Commit N°3 : Ajout fichier style
+
+- Commit 3 : Modification style
+
+- Commit js 1 : Ajout fichier Dynamique
+
+- Commit 11.06 : Ajout bouton tous
+
+- Update 17.06.25 : Ajout js login et modale
+
+- Commit 23.06 : Supprimer img modale + fermeture
+
+- Commit 25/06 : Ajout img + catégorie modale
+
+- Commit 26 : Style bouton modale + logout
+
+- update26.06 : Désactiver btn ajout modale
+
+- Commit 27.06 : Const API
+
+- Commit 28.6 : Update projet 
+

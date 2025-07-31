@@ -12,8 +12,11 @@ Ce repo git contient les 2 briques logicielles du projet
 ### Backend
 Ouvrir le dossier Backend et lire le README.md
 
+1) npm install 
+2) npm start
+
 ### Frontend
-Ouvrir le dossier Frontend et lancer liveserver de votre IDE
+Ouvrir le dossier Frontend et lancer liveserver de votre IDE (Go live)
  
 ## Astuce
  
