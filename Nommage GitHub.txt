@@ -28,3 +28,5 @@ des commits.
 
 - Commit 28.6 : Update projet 
 
+- Le reste des commits ont été nommés correctement 
+

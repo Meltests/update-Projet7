@@ -1,32 +1,34 @@
 
 
-const form = document.getElementById('login-form'); // je vais chercher l'element de mon HTML que je souhaite traiter //
+const form = document.getElementById('login-form'); 
 
-  form.addEventListener('submit', async (evenementlogin) => { // je vais écouter l'évenement au submit / formulaire // 
-    evenementlogin.preventDefault(); // Empêche la soumission classique du formulaire //
+  form.addEventListener('submit', async (evenementlogin) => { 
+    evenementlogin.preventDefault(); 
 
-    const email = document.getElementById('email').value; // je vais chercher les elements dans mon DOM //
-    const password = document.getElementById('password').value; //je met value car champ input//
-
-    try { // try pour afficher message si pas bon //
-      const response = await fetch('http://localhost:5678/api/users/login', { //aller récuperer mon API//
+    const email = document.getElementById('email').value; 
+    const password = document.getElementById('password').value; 
+ 
+    // Appel d'API avec methode POST // 
+    try { 
+      const response = await fetch('http://localhost:5678/api/users/login', { 
         method: 'POST', 
         headers: {
-          'Content-Type': 'application/json', // Trouvé dans request body du swagger // 
+          'Content-Type': 'application/json',  
         },
-        body: JSON.stringify({ email, password }), // je vais chercher les elements body dans le swagger //
+        body: JSON.stringify({ email, password }), 
       });
 
       if (!response.ok) {
         throw new Error('Identifiants incorrects');
       }
 
-      const data = await response.json(); // creer fichier json pour le stocker dans localstorage //
+      const data = await response.json(); 
 
-      localStorage.setItem('token', data.token);  // Stocker le token dans localstorage ("id", "valeur")//
-      window.location.href = 'index.html'; // redirection vers la page d'accueil une fois token utilisé-connecté // 
+      // Token localStorage // 
+      localStorage.setItem('token', data.token);  
+      window.location.href = 'index.html'; 
 
     } catch (error) {
-      alert('Erreur : Email ou mot de passe incorrect'); 
+      alert('Email ou mot de passe incorrect'); 
     }
 });

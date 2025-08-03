@@ -6,38 +6,38 @@ async function Galleriemodale() {
 
 
   try {
-   const photosModale = await Galleriephoto();  // Appelle la fonction déjà exportée, et récupère les données API
+   const photosModale = await Galleriephoto(); 
  
-   const modaleContainer = document.querySelector(".photo-gallerie"); // je récupere l'élement du DOM que je veux // 
-   modaleContainer.innerHTML = ''; // vider ce qui est avant //
+   const modaleContainer = document.querySelector(".photo-gallerie"); 
+   modaleContainer.innerHTML = ''; 
 
-   photosModale.forEach(item => { // je fais ma boucle // 
-        const div = document.createElement('div'); //je creer la div qui contiendra mes elements: img, alt etc//
-        div.classList.add('gallerie-item'); // je crrer la class associé à la div //
+   photosModale.forEach(item => {  
+        const div = document.createElement('div'); 
+        div.classList.add('gallerie-item'); 
 
         const img = creerImageElement(item); 
 
-        const deleteSpan = document.createElement('span'); //je creer le span dans la div qui va contenir l'icone poubelle//
+        const deleteSpan = document.createElement('span');
         deleteSpan.classList.add('delete-icon');
         deleteSpan.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
 
 
     // Supprimer image gallerie depuis la modale //
          
-      deleteSpan.addEventListener('click', async () => { //evenemnt au clic sur pooubelle//
+      deleteSpan.addEventListener('click', async () => { 
           
-        const token = localStorage.getItem('token'); //apelle le token //
+        const token = localStorage.getItem('token'); 
         if (!token) return;
 
         const confirmDelete = confirm("Êtes-vous sûr de vouloir supprimer cette photo ?");
         if (!confirmDelete) {
-          return; // si pas de confirmation de suppression alors retour //
+          return; 
         }
 
 
         
        try {
-        const response = await fetch(`http://localhost:5678/api/works/${item.id}`, { //route de l'API//
+        const response = await fetch(`http://localhost:5678/api/works/${item.id}`, { 
           method: 'DELETE',
           headers: {
           'Authorization': `Bearer ${token}`
@@ -45,8 +45,8 @@ async function Galleriemodale() {
         });
 
         if (response.ok) {
-          div.remove(); // Supprime la div (img) de la modale //
-          await Galleriemodale(); // Recharge la galerie modale //
+          div.remove(); 
+          await Galleriemodale(); 
         }
         } catch (error) {
         }
@@ -83,9 +83,9 @@ async function ChargementCategories() {
 
 
     categories.forEach(categorie => {
-      const option = document.createElement('option'); // je creer une option de dynamique qui affichera la catégorie // 
-      option.value = categorie.id;         // id de la catégorie (swagger) //
-      option.textContent = categorie.name; // afficher le nom de la catégorie (swagger) //
+      const option = document.createElement('option');
+      option.value = categorie.id;       
+      option.textContent = categorie.name;
       categorySelect.appendChild(option);
     });
 
@@ -94,7 +94,8 @@ async function ChargementCategories() {
   }
 } 
 
-/////
+
+// Affichage des elements de l'encart ajout photo modale2 // 
 
 function afficherElementsFormulaireImage(afficher) {
   const fondencartIcon = document.querySelector('.fond-encart i');
@@ -113,37 +114,36 @@ function afficherElementsFormulaireImage(afficher) {
 
 
 
+document.addEventListener('DOMContentLoaded', () => {  
+    
+  ChargementCategories(); 
+
 
 //OUVRIR LA MODALE//
-
-document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est chargé // 
-    
-  ChargementCategories(); // Appel de la fonction pour charger les catégories//
-
   
-  const openModale = document.querySelector('.mode-edition'); //je vais chercher l'élement// 
+  const openModale = document.querySelector('.mode-edition'); 
   const modale = document.getElementById('modale1'); 
 
   if (openModale && modale) {
     openModale.addEventListener('click', (ouvrirModale) => {
-      ouvrirModale.preventDefault(); // pour ne pas recharger la page//
+      ouvrirModale.preventDefault(); 
       modale.style.display = 'flex';
     });
   }
 
 // FERMER LA MODALE //
   
-  const fermerModale = document.querySelector('.close-btn'); // je vais chercher l'element croix//
+  const fermerModale = document.querySelector('.close-btn'); 
 
-  if (fermerModale && modale) { //j'apelle mes 2 consts concernées la croix et la modale//
+  if (fermerModale && modale) { 
         fermerModale.addEventListener('click', () => { 
-        modale.style.display ='none'; // si je clique sur la croix, alors la modale disparait// 
+        modale.style.display ='none'; 
         });
   }
 
 
 
-  // afficher la deuxiéme partie modale au click sur valider // 
+  // Afficher la deuxiéme partie modale au click sur valider // 
 
   const btnAjouterPhoto = document.getElementById('Validerbtn');
   const modalePartie1 = document.querySelector('.modale-partie-1');
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
     });
   }
   
-  // supprimer fleche de retour sur 1er slide de la modale //
+  // Supprimer fleche de retour sur 1er slide de la modale //
    if (flecheRetour && modalePartie1 && modalePartie2) {
     flecheRetour.addEventListener('click', () => {
       modalePartie2.style.display = 'none';
@@ -168,9 +168,9 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
   }
  
 
-  // fermer la modale en cliquant sur coté // 
+  // Fermer la modale en cliquant sur coté // 
 
-     if (modale) { // "modale" est la class de aside, dont la partie en gris hors de la modale //
+     if (modale) { 
         modale.addEventListener('click', (fermerauclic) => {
           if (fermerauclic.target === modale) {
           modale.style.display = 'none';
@@ -182,28 +182,29 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
 
 
 
-// AJOUT PHOTO SUR LA MODALE //
+// AJOUT PHOTO SUR LA MODALE VIA FORMULAIRE //
 
-      const form = document.getElementById('modaleForm'); // je vais chercher le formulaire de la modale//
-      const chargementimg = document.getElementById('ajouterImg'); //
+      const form = document.getElementById('modaleForm');
+      const chargementimg = document.getElementById('ajouterImg'); 
       const boutonajout = document.getElementById('boutonajout');
       const nomImage = document.getElementById('nameimg');
       
       
 
-      if (boutonajout && chargementimg && nomImage) {
+      if (boutonajout && chargementimg) {
           boutonajout.addEventListener('click', () => { 
-          chargementimg.click(); // changer d'image quand je clique sur le bouton //
+          chargementimg.click(); 
       });
 
 
-  // ajout nom du fichier dans le span à la création //
-      chargementimg.addEventListener('change', () => { // change pour modifier la valeur du champ //
-        if (chargementimg.files.length > 0) { // si au moins 1 fichier selectionné //
+  // Ajout nom du fichier dans le span à la création //
+      chargementimg.addEventListener('change', () => { 
+        if (chargementimg.files.length > 0) { 
         nomImage.textContent = chargementimg.files[0].name;
         } 
        }); 
        }
+
 
 // Afficher la photo ajoutée en format image //
 
@@ -231,21 +232,22 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
       }
     });
   
-//////////////////////////
 
+
+// POSTER CES INFOS DANS L'API // 
 
        if (form) {
 
         
-          form.addEventListener('submit', async (eventform) => { // submit pour le formulaire //
-          eventform.preventDefault(); // eviter que la page se recharge //
+          form.addEventListener('submit', async (eventform) => { 
+          eventform.preventDefault(); 
 
           const imageAjoutee = chargementimg.files[0];
           const title = document.getElementById('title').value;
           const category = document.getElementById('category').value;
           const visuelImage = document.getElementById('preview-image');
 
-     if (!imageAjoutee || !title || !category) { // si pas un des elements, recevoir ce message //
+     if (!imageAjoutee || !title || !category) { 
       alert('Veuillez remplir tous les champs.');
       return;
     }
@@ -258,18 +260,18 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
     }
 
     const formData = new FormData();
-    formData.append('image', imageAjoutee); // append pour ajouter valeur // 
+    formData.append('image', imageAjoutee); 
     formData.append('title', title);
     formData.append('category', category);
 
  
     try {
-      const response = await fetch(urlAPI + 'works', { // creer requete API dans POST //
+      const response = await fetch(urlAPI + 'works', { 
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
         },
-        body: formData // je viens ajouter dans mon API la data crée (img,titre,catérogie) //
+        body: formData 
       });
 
     
@@ -277,8 +279,8 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
       if (response.ok) {
         alert("Photo ajoutée avec succès !");
         form.reset();
-        nomImage.textContent = ''; //vider les champs une fois photo ajoutée//    
-        visuelImage.src = ''; // Réinitialiser la preview de l'image //
+        nomImage.textContent = '';     
+        visuelImage.src = ''; 
         visuelImage.style.display = 'none';
 
         // Réafficher les éléments masqués
@@ -292,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
 
 
         await Galleriemodale();
-        modalePartie2.style.display = 'none'; // une fois que la photo est ajoutée, revenir sur modale 1//
+        modalePartie2.style.display = 'none'; 
         modalePartie1.style.display = 'block';
         flecheRetour.style.display = 'none';
       } else {
@@ -305,19 +307,20 @@ document.addEventListener('DOMContentLoaded', () => { // une fois que DOM est ch
   });
 }
 
-///////// Bouton apparait en vert quand tous les champs sont remplis // 
+/// Bouton apparait en vert quand tous les champs sont remplis // 
 const boutonValider = document.getElementById('BtnValiderActif');
 const champTitre = document.getElementById('title');
 const champCategorie = document.getElementById('category');
 
 
-function activerBoutonSiChampsRemplis() {// Fonction pour activer ou désactiver le bouton//
+// Fonction pour activer ou désactiver le bouton//
+function activerBoutonSiChampsRemplis() {
   if (chargementimg.files.length > 0 && champTitre.value !== '' && champCategorie.value !== '') {
-    boutonValider.disabled = false; // si l'image est selectionné, le titre et catégorie est remplie //
-    boutonValider.style.backgroundColor = '#1D6154'; // alors le bouton deviens vert //
+    boutonValider.disabled = false;
+    boutonValider.style.backgroundColor = '#1D6154'; 
   } else {
     boutonValider.disabled = true;
-    boutonValider.style.backgroundColor = '#A7A7A7'; // sinon le bouton deviens gris //
+    boutonValider.style.backgroundColor = '#A7A7A7'; 
   }
 }
 activerBoutonSiChampsRemplis();

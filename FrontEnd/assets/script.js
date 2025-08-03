@@ -1,9 +1,8 @@
 
-//fonction API // 
-
+//Fonction API // 
 export const urlAPI = 'http://localhost:5678/api/';
 
-// 
+// Fonction image // 
 export function creerImageElement(item) {
   const img = document.createElement('img');
   img.src = item.imageUrl;
@@ -12,33 +11,32 @@ export function creerImageElement(item) {
 }
 
 
-
 // CREATION GALLERIE IMAGE EN DYNAMIQUE //
-export async function Galleriephoto() { // je fais un export pour réutiliser ma fonction dans autre js//
+export async function Galleriephoto() { 
   try {
-    const response = await fetch(urlAPI + 'works'); // Appeler l'API pour récuperer les données images//
+    const response = await fetch(urlAPI + 'works'); 
     
     if (!response.ok) {
-    throw new Error('Erreur lors du chargement'); // Le message s'affiche si pas de lien avec API //
+    throw new Error('Erreur lors du chargement'); 
     }
-    const galleryItems = await response.json(); // je nomme le fichier qui contiendra les elements de mon API //
+    const galleryItems = await response.json(); 
     
 
-    const galleryContainer = document.querySelector('.gallery'); // j'apelle la class de ma galerie pour creer des elements en dynamique //
+    const galleryContainer = document.querySelector('.gallery'); 
     galleryContainer.innerHTML = '';
 
-    galleryItems.forEach(item => { //je creer ma boucle qui contient ces elements : je recupere l'element json // 
-      const figure = document.createElement('figure'); // je creer l'element figure dans le html //
+    galleryItems.forEach(item => { 
+      const figure = document.createElement('figure'); 
       const img = creerImageElement(item);
 
       const figcaption = document.createElement('figcaption'); 
       figcaption.innerText = item.title;
 
-      figure.appendChild(img);// les appendChild lient l'element enfant au Parent //  
+      figure.appendChild(img);
       figure.appendChild(figcaption);
       galleryContainer.appendChild(figure);
     });
-     return galleryItems; // ce qui me permet de faire mon export/import grace au json// 
+     return galleryItems;
 
   } catch (error) {
     console.error(error);
@@ -47,14 +45,11 @@ export async function Galleriephoto() { // je fais un export pour réutiliser ma
 
 
 
-
-
-
 // CREATION BOUTONS CATEGORIES EN DYNAMIQUE // 
 
 async function Categories() {
   try {
-    const response = await fetch(urlAPI + 'categories'); // remplace l'URL par la tienne //
+    const response = await fetch(urlAPI + 'categories');
     
     if (!response.ok)    {
         throw new Error('Erreur lors du chargement des catégories');
@@ -63,16 +58,16 @@ async function Categories() {
 
     
     // Création bouton "Tous" // 
-    const filtresContainer = document.getElementById('button-container'); //  j'apelle l'emplacement de mon HTML pour creer un element // 
-    const boutonTous = document.createElement('button');// je creer un bouton // 
-    boutonTous.innerText = "Tous"; // j'apelle le bouton "Tous" //
-    boutonTous.classList.add("filtres-button", "active"); // je lui ajoute une class css // 
-    boutonTous.addEventListener("click", () => { //je creer un evenement au click  sur mon bouton // 
+    const filtresContainer = document.getElementById('button-container');  
+    const boutonTous = document.createElement('button');
+    boutonTous.innerText = "Tous";
+    boutonTous.classList.add("filtres-button", "active"); 
+    boutonTous.addEventListener("click", () => { 
       activerBoutonActif(boutonTous);
       Galleriephoto();
     });
    
-    filtresContainer.appendChild(boutonTous); // je lie l'element enfant "bouton" à l'élement parent "filtresContianer". 
+    filtresContainer.appendChild(boutonTous); 
 
     // Creer boucle / bouton pour chaque catégorie //
     categoryItems.forEach(category => {
@@ -93,30 +88,34 @@ async function Categories() {
   }
 }
 
+
+
+// FONCTION POUR FILTRER LES CATEGORIES // 
+
 async function filtrerCategorieGalerie(categoryId = 0) {
   try {
-    const response = await fetch(urlAPI + 'works');  // recuperer les photos filtrées dans l'API //
+    const response = await fetch(urlAPI + 'works');  
    
     if (!response.ok) {
       throw new Error("Erreur lors du chargement des photos");
     }
-    const photos = await response.json(); //creation fichier json//
+    const photos = await response.json(); 
 
-    const galleryContainer = document.querySelector('.gallery'); // chercher l'element dans le DOM //
-    galleryContainer.innerHTML = ''; // Met à jour les elements du dom/ supprime la galleries des catégories nons appelées // 
+    const galleryContainer = document.querySelector('.gallery'); 
+    galleryContainer.innerHTML = ''; 
 
-    const photosFiltrees = categoryId ? photos.filter(item => item.categoryId === categoryId) : photos; // filtre selon catégorie selectionnée //
+    const photosFiltrees = categoryId ? photos.filter(item => item.categoryId === categoryId) : photos; 
 
     photosFiltrees.forEach(item => {
-      const figure = document.createElement('figure');  // creer element figure //
-      const img = document.createElement('img'); //creer element img//
+      const figure = document.createElement('figure'); 
+      const img = document.createElement('img'); 
       img.src = item.imageUrl;
       img.alt = item.title;
 
-      const figcaption = document.createElement('figcaption');  //creer element caption//
+      const figcaption = document.createElement('figcaption');  
       figcaption.innerText = item.title;
 
-      figure.appendChild(img);  // lier element enfant à parent // 
+      figure.appendChild(img);  
       figure.appendChild(figcaption);
       galleryContainer.appendChild(figure);
     });
@@ -126,8 +125,8 @@ async function filtrerCategorieGalerie(categoryId = 0) {
 }
 
 function activerBoutonActif(boutonActif) {
-  const boutons = document.querySelectorAll('.filtres-button'); // j'apelle la class de mon bouton //
-  boutons.forEach(b => b.classList.remove('active')); // je remove l'activation de la couleur du bouton // 
+  const boutons = document.querySelectorAll('.filtres-button'); 
+  boutons.forEach(b => b.classList.remove('active'));
   boutonActif.classList.add('active');
 }
 
@@ -136,15 +135,15 @@ function activerBoutonActif(boutonActif) {
 // Afficher / supprimer elements en MODE EDITION // 
   
  function AffichageloginLogout() {
-  const token = localStorage.getItem('token'); // je récupére le token de ma page login //
-    const banner = document.querySelector('.banner-top'); // je récupere les elements du DOM // 
+  const token = localStorage.getItem('token'); 
+    const banner = document.querySelector('.banner-top'); 
     const loginMenu = document.getElementById('login');
     const logoutMenu = document.getElementById('logout');
     const btnCategories = document.getElementById('button-container');
     const btnModifier = document.querySelector('.mode-edition');
 
   if (token) {
-   banner.style.display = 'flex'; // condition sur element si token actif, pour activer l'element//
+   banner.style.display = 'flex'; 
    loginMenu.style.display = 'none';
    logoutMenu.style.display = 'inline-block';
    btnCategories.style.display = 'none';
@@ -168,7 +167,7 @@ function activerBoutonActif(boutonActif) {
 }
  }
 
-
+// laisser charger le html avant d'executer les fonctions // 
 document.addEventListener('DOMContentLoaded', () => {
   Galleriephoto();
   Categories();
